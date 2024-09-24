@@ -1,0 +1,17 @@
+.form-list-container {
+  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+
+.form-list-item {
+  display: block;
+  margin-bottom: 15px; /* Espacio entre cada elemento del formulario */
+  width: 100%; /* Opcional: asegura que los elementos del formulario ocupen todo el ancho disponible */
+}
+.form-container {
+  max-width: 600px; /* Ajusta el ancho máximo según tus preferencias */
+  margin: auto; /* Centra el formulario horizontalmente */
+  padding: 20px; /* Añade espaciado interior al contenedor */
+  background-color: rgba(144, 238, 144, 0.2); /* Fondo verde transparente */
+  border: 1px solid #ccc; /* Borde opcional */
+  border-radius: 8px; /* Bordes redondeados opcionales */
+}

@@ -1,0 +1,42 @@
+<div class="container mt-4">
+
+    <h2>Formulario de Compañía</h2>
+    <div *ngIf="company" >
+      <div class="text-center">
+        <div class="profile-picture-container d-inline-block position-relative"
+            (mouseenter)="showEditButton = true" (mouseleave)="showEditButton = false">
+          <img [src]="profileImageUrl || (company |companyLogo)" alt="Foto de perfil" class="profile-picture">
+          <input type="file" #fileInput (change)="onFileSelected($event)" class="file-input">
+          <button mat-icon-button *ngIf="showEditButton" class="edit-button" (click)="fileInput.click()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+      <div class="form-list-container">
+        <mat-form-field appearance="fill" class="form-list-item">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" placeholder="Nombre de la compañía" required value="{{company?.name}}">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-list-item">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="address" placeholder="Dirección de la compañía" value="{{company?.address}}">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-list-item">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="phone" placeholder="Teléfono de la compañía" value="{{company?.phone}}">
+        </mat-form-field>
+
+        <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="companyForm.invalid">
+        {{ company?._id ? 'Actualizar' : 'Guardar' }}
+        </button>
+      </div>
+    </form>
+</div>

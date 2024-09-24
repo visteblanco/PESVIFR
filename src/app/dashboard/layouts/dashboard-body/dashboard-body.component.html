@@ -1,0 +1,24 @@
+
+<div *ngIf="idCompani" calss ="container-fluid" >
+  <div class="row">
+
+    <!-- Contenido Principal -->
+    <main role="main" class="col-md-10 ml-md-auto col-lg-10 px-4">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+              <button *ngIf="userRoles?.includes(ROLES.DRIVER)
+              || userRoles?.includes(ROLES.ADMIN)
+              || userRoles?.includes(ROLES.OWNER)"
+              (click)="realizarAccion('inspeccion')" class="btn btn-image">
+                <img src="../../../../assets/images/inspeccion.png" alt="Inspección" class="btn-img">
+                <p>Inspeccion</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

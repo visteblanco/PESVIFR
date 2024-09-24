@@ -1,0 +1,32 @@
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Oculta el sidebar por defecto */
+  width: 250px;
+  height: 100%;
+  background-color: #35b635;
+  padding-top: 56px; /* Altura de la barra de navegación */
+  transition: all 0.3s;
+}
+
+.sidebar.show {
+  left: 0; /* Muestra el sidebar cuando tiene la clase 'show' */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 8px;
+}
+
+.main-content {
+  margin-left: 250px; /* Deja espacio para el sidebar */
+}
+
+.bg-green {
+  background-color: green !important;
+}

@@ -1,0 +1,10 @@
+.btn-image {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.btn-img {
+  width: 200px; /* ajusta el ancho según tus necesidades */
+  height: auto; /* esto permite que la altura se ajuste automáticamente según el ancho */
+}

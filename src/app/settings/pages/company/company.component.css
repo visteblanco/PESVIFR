@@ -1,0 +1,40 @@
+.form-list-container {
+  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+
+.form-list-item {
+  display: block;
+  margin-bottom: 15px; /* Espacio entre cada elemento del formulario */
+  width: 100%; /* Opcional: asegura que los elementos del formulario ocupen todo el ancho disponible */
+}
+
+
+.file-input {
+  margin-top: 8px; /* Espacio superior para separar del campo anterior */
+}
+
+
+.profile-picture-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-picture {
+  width: 200px; /* Ajusta el tamaño según sea necesario */
+  height: 200px; /* Ajusta el tamaño según sea necesario */
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.edit-button {
+  position: absolute;
+  top: 10px; /* Ajusta la posición vertical del botón */
+  right: 10px; /* Ajusta la posición horizontal del botón */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  color: white;
+}
+.file-input {
+  position: absolute;
+  top: -9999px; /* Fuera de la vista visual */
+  left: -9999px; /* Fuera de la vista visual */
+}
