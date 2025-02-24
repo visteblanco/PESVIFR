@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Company } from '../../interfaces/company.interface';
 import { CompanyService } from '../../services/company.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-company',
@@ -11,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./company.component.css']
 })
 export class CompanyComponent implements OnInit{
+  @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement> | undefined;
   public company? : Company | undefined;
   showEditButton: boolean = false;
   companyForm: FormGroup;
@@ -23,7 +23,7 @@ export class CompanyComponent implements OnInit{
   companyData: any;
   logoImageUrl: string | undefined;
 
-  constructor(private router: Router,private fb: FormBuilder, private companyService: CompanyService,private authService: AuthService) {
+  constructor(private fb: FormBuilder, private companyService: CompanyService,private authService: AuthService) {
     const user = this.authService.currentUser();
     this.userRoles = user?.roles;
     this.idCompani = user?.company;
@@ -49,7 +49,6 @@ export class CompanyComponent implements OnInit{
       console.error('Error al obtener la imagen del logo:', error);
     }
   }
-  @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement> | undefined;
 
   openFileExplorer(): void {
     this.fileInput?.nativeElement.click();
@@ -132,7 +131,6 @@ export class CompanyComponent implements OnInit{
       );
     }
   }
-
   updateCompany(companyData: Company): void {
     this.companyService.updateCompany(companyData, this.file).subscribe(
       (updatedCompany: Company) => {

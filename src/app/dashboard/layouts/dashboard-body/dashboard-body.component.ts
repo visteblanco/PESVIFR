@@ -4,8 +4,6 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ROLES } from 'src/app/shared/roles';
 
-
-
 @Component({
   selector: 'app-dashboard-body',
   templateUrl: './dashboard-body.component.html',
@@ -29,6 +27,7 @@ export class DashboardBodyComponent {
   openModal(): void {
     this.modalService.showMessage('Debe registrar la compañia para poder ver las aplicaciones o contacte al administrador');
   }
+  
   realizarAccion(accion: string) {
     if (accion === 'inspeccion') {
       this.router.navigateByUrl('/inspeccion');

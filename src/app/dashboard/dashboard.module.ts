@@ -5,6 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { DashboardBodyComponent } from './layouts/dashboard-body/dashboard-body.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule 
   ],
   exports: [
     DashboardLayoutComponent
