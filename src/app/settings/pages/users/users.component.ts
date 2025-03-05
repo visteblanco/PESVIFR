@@ -6,17 +6,16 @@ import { UserService } from '../../services/users.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CompanyService } from '../../services/company.service';
 import { Company } from '../../interfaces/company.interface';
-// Asegúrate de importar el modelo de usuario adecuadamente
-
-
-// Asegúrate de importar el modelo de usuario adecuadamente
-
+import { CheckTokenResponse } from '../../interfaces/check-token.response';
+import Swal from 'sweetalert2';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
+
 export class UsersComponent implements OnInit {
   public user? : User | undefined;
   ROLES = ROLES;
@@ -31,7 +30,7 @@ export class UsersComponent implements OnInit {
   public users: User[] = [];
   public displayedColumns: string[] = ['email', 'name', 'isActive', 'roles', 'actions'];
 
-  constructor(private fb: FormBuilder,private userService: UserService,private authService: AuthService,private companyService: CompanyService) {
+  constructor(private fb: FormBuilder,private alertService:AlertService, private userService: UserService,private authService: AuthService,private companyService: CompanyService) {
     const user = this.authService.currentUser();
     this.userRoles = user?.roles;
     this.idCompani = user?.company;
@@ -86,67 +85,52 @@ export class UsersComponent implements OnInit {
   }
   
   registerUser(userData: User): void {
-    const idUser = this.idUser;
-    if(idUser){
-      this.userService.registerUser(userData,idUser).subscribe(
-        (createUser: User) => {
-          console.log('Company updated successfully');
-          this.user = createUser;
-          this.userForm = this.fb.group({
-            name: [{ value: this.user?.name || '', disabled: !!this.user }, Validators.required],
-            email: [this.user?.email || '', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            roles: [this.user?.roles || '', Validators.required],
-            status: [this.user?.isActive ?? false], 
-            company: [this.user?.company || '']
-          });
-        },
-        error => {
-          console.error('Error Create User:', error);
-          // Manejo de errores
-        }
-      );
-    }
+    this.userService.registerUser(userData).subscribe(
+      (createUser: CheckTokenResponse) => {
+        this.alertService.success('Create user '+createUser.user.name,'Success!');
+        this.getUsersByCompany();
+        
+      },
+      error => {
+        this.alertService.error('Error Create User','Error!');
+      }
+    );
   }
 
   editUser(user: User): void {
     this.showForm = true;
     this.showTable = false;
     this.userForm.patchValue({
-      id: user.id,  // Asegúrate de asignar el ID aquí
+      id: user.id, 
       email: user.email,
       name: user.name,
-      password: '',  // Deja el campo de contraseña vacío
+      password: '',  
       isActive: user.isActive,
       roles: user.roles,
       company: user.company,
       vehicles: user.vehicles
     });
   }
-  
 
   cancel(): void {
-    this.userForm.reset(); // Limpia el formulario
+    this.userForm.reset(); 
     this.showForm = false; 
     this.showTable = true; 
   }
-  
-  
-  
+
   deleteUser(id: string): void {
     if (confirm('Are you sure you want to delete this user?')) {
       this.userService.deleteUser(id).subscribe(
         (response) => {
-          console.log(response.message);
+          this.alertService.success('Delete user: '+response.message,'Success!');
           this.users = this.users.filter(user => user.id !== id);
         },
         (error) => {
-          console.error('Error deleting user:', error);
+          this.alertService.error('Error deleting user '+error,'Error!');
         }
       );
     }
   }
-  
 
   onSubmit(): void {
     if (this.userForm.valid) {
@@ -167,19 +151,32 @@ export class UsersComponent implements OnInit {
             this.userForm.reset();
             this.showForm = false;
             this.showTable = true;
+            this.alertService.success('Update user: '+updatedUser.name,'Success!');
           },
           error => {
-            console.error('Error al actualizar el usuario:', error);
+            this.alertService.error('Error deleting user '+error,'Error!');
           }
         );
       } else {
-        this.registerUser(formValue);
+        const formValue = {
+          ...this.userForm.value,
+          company:this.idCompani
+        };    
+        this.registerUser(formValue);        
+        this.userForm.reset();
+        this.showForm = false;
+        this.showTable = true;
       }
     }
-  }  
+  }
   
   isDriverSelected(): boolean {
     return this.userForm.get('roles')?.value?.includes('driver');
   }
-  
+
+  addUser(){
+    this.userForm.reset(); 
+    this.showTable = false;
+    this.showForm = true;
+  }  
 }

@@ -1,4 +1,9 @@
 export interface Vehicle {
-  id: string;
-  name: string;
+  _id: string;
+  idCompany: string;
+  plate:string
+  vehicleModel?: string;
+  brand?: string; 
+  year?: number; 
+  color?: string; 
 }

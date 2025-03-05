@@ -14,6 +14,7 @@ export class SettingsComponent {
     // { name: 'General', icon: 'settings', route: './users' },
     { name: 'Compañia', icon: 'local_shipping', route: './company' },
     { name: 'Usuarios', icon: 'account_circle', route: './users' },
+    { name: 'Vehicles', icon: 'directions_car_sharp', route: './vehicles' },
     { name: 'Notificaciones', icon: 'notifications', route: '/configuracion/notificaciones' },
     { name: 'Seguridad', icon: 'security', route: '/configuracion/seguridad' }
   ];

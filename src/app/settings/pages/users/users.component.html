@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <h1  class="text-center">Gestión de Usuarios</h1>
   <!-- Botón para agregar usuario -->
-  <button mat-raised-button color="primary" *ngIf="showTable" (click)="showTable = false; showForm = true">Agregar Usuario</button>
+  <button mat-raised-button color="primary" *ngIf="showTable" (click)="addUser()">Agregar Usuario</button>
 
   <!-- Tabla de usuarios -->
   <table mat-table [dataSource]="users" class="mat-elevation-z8" *ngIf="showTable">

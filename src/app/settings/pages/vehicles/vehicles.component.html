@@ -1,0 +1,88 @@
+<div class="container mt-4">
+    <h1 class="text-center">Gestión de Vehículos</h1>
+    
+    <!-- Botón para agregar vehículo -->
+    <button mat-raised-button color="primary" *ngIf="showTable" (click)="addVehicle()">Agregar Vehículo</button>
+  
+    <!-- Tabla de vehículos -->
+    <table mat-table [dataSource]="vehicles" class="mat-elevation-z8" *ngIf="showTable">
+      <!-- Columnas -->
+      <ng-container matColumnDef="plate">
+        <th mat-header-cell *matHeaderCellDef> Placa </th>
+        <td mat-cell *matCellDef="let vehicle"> {{ vehicle.plate }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef> Marca </th>
+        <td mat-cell *matCellDef="let vehicle"> {{ vehicle.brand }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="vehicleModel">
+        <th mat-header-cell *matHeaderCellDef> Modelo </th>
+        <td mat-cell *matCellDef="let vehicle"> {{ vehicle.vehicleModel }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef> Año </th>
+        <td mat-cell *matCellDef="let vehicle"> {{ vehicle.year }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="color">
+        <th mat-header-cell *matHeaderCellDef> Color </th>
+        <td mat-cell *matCellDef="let vehicle"> {{ vehicle.color }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let vehicle">
+          <button mat-icon-button color="primary" (click)="editVehicle(vehicle)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteVehicle(vehicle._id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <!-- Filas de la tabla -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <!-- Formulario de vehículo -->
+    <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()" *ngIf="showForm" class="col-md-8 offset-md-2 form-container">
+      <div class="form-group mt-3">
+        <label for="plate">Placa</label>
+        <input type="text" id="plate" class="form-control" formControlName="plate" placeholder="Ingresa la placa del vehículo">
+        <div *ngIf="vehicleForm.get('plate')?.invalid && (vehicleForm.get('plate')?.dirty || vehicleForm.get('plate')?.touched)" class="text-danger">
+          La placa es requerida.
+        </div>
+      </div>
+  
+      <div class="form-group mt-3">
+        <label for="brand">Marca</label>
+        <input type="text" id="brand" class="form-control" formControlName="brand" placeholder="Ingresa la marca">
+      </div>
+  
+      <div class="form-group mt-3">
+        <label for="vehicleModel">Modelo</label>
+        <input type="text" id="vehicleModel" class="form-control" formControlName="vehicleModel" placeholder="Ingresa el modelo">
+      </div>
+  
+      <div class="form-group mt-3">
+        <label for="year">Año</label>
+        <input type="number" id="year" class="form-control" formControlName="year" placeholder="Ingresa el año">
+      </div>
+  
+      <div class="form-group mt-3">
+        <label for="color">Color</label>
+        <input type="text" id="color" class="form-control" formControlName="color" placeholder="Ingresa el color">
+      </div>
+  
+      <div class="form-group d-flex align-items-center gap-2 mt-3">
+        <button type="submit" class="btn btn-primary" [disabled]="vehicleForm.invalid">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  

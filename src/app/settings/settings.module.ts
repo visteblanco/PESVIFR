@@ -10,6 +10,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CompanyComponent } from './pages/company/company.component';
 import { CompanyLogoPipe } from './pipes/company-logo.pipe';
+import { VehiclesComponent } from './pages/vehicles/vehicles.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CompanyLogoPipe } from './pipes/company-logo.pipe';
         SettingsLayoutComponent,
         UsersComponent,
         CompanyComponent,
-        CompanyLogoPipe
+        CompanyLogoPipe,
+        VehiclesComponent
     ],
     imports: [
         CommonModule,
